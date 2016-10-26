@@ -59,19 +59,27 @@ public class MainActivity extends AppCompatActivity {
                 call.enqueue(new Callback<Example>() {
                     @Override
                     public void onResponse(Call<Example>call, Response<Example> response) {
-                        String status = response.body().getStatus();
-                        String dataK;
-                        if(status == "success") {
+//                        String status = response.body().getStatus();
+//
+//                        if(status) {
                             Data jenis = response.body().getData();
                             Kendaraan kend = jenis.getKendaraan();
-                            //JatuhTempo pjk = jenis.getJatuhTempo();
-                            dataK = "Jenis: " + kend.getJenis() + "\n Merk: " + kend.getMerk() + "\n Tahun: " + kend.getTahunPembuatan();
-                        } else {
-                            dataK = response.body().getMessage();
-                        }
+//                            String dataK;
+//                        if(status == "success") {
+                            String dataK = "Jenis: " + kend.getJenis() + "\nMerk: " + kend.getMerk() + "\nTahun: " + kend.getTahunPembuatan();
+                            final TextView textView = (TextView) findViewById(R.id.textView);
+                            textView.setText(dataK);
+//                    } else {
+//                            final TextView textView = (TextView) findViewById(R.id.textView);
+//                            textView.setText(response.body().getMessage());
+//                        }
+//                            final TextView textView = (TextView) findViewById(R.id.textView);
+//                            textView.setText(dataK);
+//                        } else {
+//                            String dataK = response.body().getMessage();
+//
 
-                        final TextView textView = (TextView) findViewById(R.id.textView);
-                        textView.setText(dataK);
+//                        }
                     }
 
                     @Override
