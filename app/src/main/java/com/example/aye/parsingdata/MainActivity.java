@@ -12,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -59,27 +60,19 @@ public class MainActivity extends AppCompatActivity {
                 call.enqueue(new Callback<Example>() {
                     @Override
                     public void onResponse(Call<Example>call, Response<Example> response) {
-//                        String status = response.body().getStatus();
-//
-//                        if(status) {
+
+                        String status = response.body().getStatus();
+
+                        if(status.equals("success")) {
                             Data jenis = response.body().getData();
                             Kendaraan kend = jenis.getKendaraan();
-//                            String dataK;
-//                        if(status == "success") {
                             String dataK = "Jenis: " + kend.getJenis() + "\nMerk: " + kend.getMerk() + "\nTahun: " + kend.getTahunPembuatan();
                             final TextView textView = (TextView) findViewById(R.id.textView);
                             textView.setText(dataK);
-//                    } else {
-//                            final TextView textView = (TextView) findViewById(R.id.textView);
-//                            textView.setText(response.body().getMessage());
-//                        }
-//                            final TextView textView = (TextView) findViewById(R.id.textView);
-//                            textView.setText(dataK);
-//                        } else {
-//                            String dataK = response.body().getMessage();
-//
-
-//                        }
+                        } else {
+                                final TextView textView = (TextView) findViewById(R.id.textView);
+                                textView.setText(response.body().getMessage());
+                        }
                     }
 
                     @Override
